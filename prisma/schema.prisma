@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  slackId  String @unique
+  score    Int    @default(0)
+}
+
+model Challenge {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String
+  flag        String
+  points      Int
+}
+
+model Submission {
+  id          Int @id @default(autoincrement())
+  userId      Int
+  challengeId Int
+  correct     Boolean
+}
