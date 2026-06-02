@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# environment variables
+.env
+
+# build output
+dist/
+
+# prisma database
+*.db
+*.db-journal
+
+# logs
+*.log
+
+# macOS
+.DS_Store
+
+# vscode settings (optional)
+.vscode/
