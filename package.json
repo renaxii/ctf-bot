@@ -1,25 +1,41 @@
 {
   "name": "ctf-bot",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "description": "A production-ready Slack bot foundation for Capture the Flag events.",
+  "main": "dist/app.js",
   "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon --watch src --ext ts --exec ts-node src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "ctf",
+    "slack",
+    "bot",
+    "prisma",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
   "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "@slack/bolt": "^4.7.3",
-    "dotenv": "^17.4.2",
-    "prisma": "^7.8.0"
+    "dotenv": "^17.4.2"
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
     "nodemon": "^3.1.14",
+    "prisma": "^7.8.0",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }

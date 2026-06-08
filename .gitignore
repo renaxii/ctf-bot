@@ -3,20 +3,30 @@ node_modules/
 
 # environment variables
 .env
+.env.*
+!.env.example
 
 # build output
 dist/
 
-# prisma database
+# prisma
+prisma/dev.db
+prisma/dev.db-journal
 *.db
 *.db-journal
+src/generated/prisma/
 
 # logs
+logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# macOS
+# operating system
 .DS_Store
+Thumbs.db
 
-# vscode settings (optional)
+# editor
+.idea/
 .vscode/
-/src/generated/prisma

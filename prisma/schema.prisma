@@ -1,29 +1,45 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  slackId  String @unique
-  score    Int    @default(0)
+  id           Int          @id @default(autoincrement())
+  slackUserId  String       @unique
+  displayName  String?
+  score        Int          @default(0)
+  submissions  Submission[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }
 
 model Challenge {
-  id          Int    @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
+  slug        String       @unique
   title       String
   description String
-  flag        String
+  flagHash    String
   points      Int
+  isActive    Boolean      @default(true)
+  submissions Submission[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }
 
 model Submission {
-  id          Int @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   userId      Int
   challengeId Int
-  correct     Boolean
+  submittedAt DateTime  @default(now())
+  answer      String
+  isCorrect   Boolean
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([challengeId])
 }
